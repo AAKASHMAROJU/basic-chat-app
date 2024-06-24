@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Chats Data</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div>
+      <h1>Chat Data</h1>
+      <button class="btn"><a href="/chats/new">New Chat</a></button>
+    </div>
+    <% chats.forEach(e=>{ %>
+    <div class="chat-container">
+      <p>from <%= e.from %> ,</p>
+      <p class="message-container">msg - <%= e.msg %></p>
+      <p>to <%= e.to %></p>
+
+      <hr />
+    </div>
+    <% })%>
+    <script src="script.js"></script>
+  </body>
+</html>

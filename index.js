@@ -1,12 +1,10 @@
 const express = require("express");
-const mongoose = require("mongoose");
+// const init = require("./init");
 const app = express();
 const path = require("path");
 const port = 3000;
 const Chat = require("./models/chat");
-
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
+const mongoose = require("mongoose");
 
 main()
   .then(() => {
@@ -17,18 +15,42 @@ main()
 async function main() {
   await mongoose.connect("mongodb://localhost:27017/whatsapp-db");
 }
+main();
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json());
 
-let chat1 = new Chat({
-  from: "Aakash",
-  to: "Bharath",
-  msg: "Hello Mowa Namaste",
-  created_at: new Date(),
-});
-
-chat1.save().then((res) => console.log(res));
+// For parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.send("Hello");
+});
+
+app.get("/chats", async (req, res) => {
+  let data = await Chat.find();
+  // console.log(data);
+  res.render("index", { chats: data });
+  // res.send("Working it is");
+});
+
+app.get("/chats/new", (req, res) => {
+  res.render("createChat");
+});
+
+app.post("/chats", async (req, res) => {
+  // console.log(req.body);
+  const { from, to, msg, date } = req.body;
+  // console.log(from + to + msg);
+  const chat_data = { from: from, to: to, msg: msg, created_at: date };
+  await Chat.insertMany([chat_data])
+    .then(() => {
+      res.redirect("/chats");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 });
 
 app.listen(port, () => {
