@@ -30,3 +30,18 @@
   color: white;
   cursor: pointer;
 }
+
+.btn a {
+  color: white;
+  text-decoration: none;
+}
+
+.chat-btn {
+  background-color: skyblue;
+  color: white;
+  padding: 0.5rem;
+}
+
+.chat-btn a {
+  text-decoration: none;
+}

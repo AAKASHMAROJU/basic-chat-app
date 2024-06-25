@@ -16,7 +16,11 @@
       <p>from <%= e.from %> ,</p>
       <p class="message-container">msg - <%= e.msg %></p>
       <p>to <%= e.to %></p>
-
+      <p><%= e.created_at.toString().split(" ")[4] %></p>
+      <p><%= e.created_at.toString().split(" ").slice(0,4).join("-") %></p>
+      <button class="chat-btn">
+        <a href=" /chats/<%=e._id%>/edit">Edit Chat</a>
+      </button>
       <hr />
     </div>
     <% })%>

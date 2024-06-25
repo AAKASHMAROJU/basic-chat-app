@@ -53,6 +53,21 @@ app.post("/chats", async (req, res) => {
     });
 });
 
+app.get("/chats/:id/edit", (req, res) => {
+  // console.log(req.params);
+  const { id } = req.params;
+  Chat.findOne({ _id: id })
+    .then((data) => {
+      console.log(data);
+      const { from, to, msg, create_at } = data;
+      res.render("editForm", { from, to, msg, created_at });
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+  // res.send("Hello");
+});
+
 app.listen(port, () => {
   console.log("The Server is running successfully at port Number ", port);
 });
