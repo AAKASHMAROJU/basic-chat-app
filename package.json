@@ -10,8 +10,10 @@
   "author": "aakash <marojuaakash2003@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.2",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
+    "method-override": "^3.0.0",
     "mongoose": "^8.4.1"
   }
 }

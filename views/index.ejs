@@ -18,9 +18,18 @@
       <p>to <%= e.to %></p>
       <p><%= e.created_at.toString().split(" ")[4] %></p>
       <p><%= e.created_at.toString().split(" ").slice(0,4).join("-") %></p>
-      <button class="chat-btn">
-        <a href=" /chats/<%=e._id%>/edit">Edit Chat</a>
-      </button>
+      <div class="btn-container">
+        <button class="chat-btn">
+          <a href=" /chats/<%=e._id%>/edit">Edit Chat</a>
+        </button>
+        <form
+          action="http://localhost:3000/<%= e.id %>/delete?_method=DELETE"
+          method="post"
+        >
+          <button class="del-btn" type="submit">Delete Chat</button>
+        </form>
+      </div>
+
       <hr />
     </div>
     <% })%>

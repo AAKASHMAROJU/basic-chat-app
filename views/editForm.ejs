@@ -5,5 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Form</title>
   </head>
-  <body></body>
+  <body>
+    <div>
+      <form action="http://localhost:3000/chats?_method=PUT" method="post">
+        <p><%= from %></p>
+        <p><%= to %></p>
+        <p>Edit the Message</p>
+        <p><%= created_at %></p>
+        <input type="text" name="id" value="<%= id %>" hidden />
+        <textarea name="msg" id=""><%= msg %></textarea>
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  </body>
 </html>
