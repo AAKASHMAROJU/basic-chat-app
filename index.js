@@ -29,20 +29,25 @@ app.use(methodOverride("_method"));
 // app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+function ayncWrap(fun) {
+  return function (req, res, next) {
+    fun(req, res, next).catch((err) => next(err));
+  };
+}
+
 app.get("/", (req, res, next) => {
   res.send("Hello");
 });
 
-app.get("/chats", async (req, res, next) => {
-  try {
+app.get(
+  "/chats",
+  ayncWrap(async (req, res, next) => {
     let data = await Chat.find();
     // console.log(data);
     res.render("index", { chats: data });
-  } catch (err) {
-    next(err);
-  }
+  })
   // res.send("Working it is");
-});
+);
 
 app.get("/chats/new", (req, res, next) => {
   res.render("createChat");
